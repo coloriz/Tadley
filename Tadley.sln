@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tadley", "Tadley\Tadley.csproj", "{C186D4E7-2B61-4554-BD83-E964272D134F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseLibrary", "..\MuseLibrary\MuseLibrary\MuseLibrary.csproj", "{FB17CE73-A92F-4684-8C0B-D14378B870A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GsrPpgSampler", "..\GsrPpgSampler\GsrPpgSampler\GsrPpgSampler.csproj", "{97653C8B-84CA-4798-A2EF-65B53F929D54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{C186D4E7-2B61-4554-BD83-E964272D134F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C186D4E7-2B61-4554-BD83-E964272D134F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C186D4E7-2B61-4554-BD83-E964272D134F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB17CE73-A92F-4684-8C0B-D14378B870A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB17CE73-A92F-4684-8C0B-D14378B870A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB17CE73-A92F-4684-8C0B-D14378B870A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB17CE73-A92F-4684-8C0B-D14378B870A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97653C8B-84CA-4798-A2EF-65B53F929D54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97653C8B-84CA-4798-A2EF-65B53F929D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97653C8B-84CA-4798-A2EF-65B53F929D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97653C8B-84CA-4798-A2EF-65B53F929D54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

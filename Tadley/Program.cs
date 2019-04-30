@@ -92,6 +92,10 @@ namespace Tadley
             var museDataFragments = museDataCollection.SelectByTime(opts.TimeOff, opts.Duration);
             var gsrPpgFragments = gsrPpgCollection.SelectByTime(opts.TimeOff, opts.Duration);
 
+            // post-process gsr/ppg data
+            var processedGsr = GsrPpgUtil.GSRfiltering(gsrPpgFragments["GSR"]);
+            var processedPpg = GsrPpgUtil.GetPPGdata(gsrPpgFragments["PPG"], TimeSpan.FromMilliseconds(100));
+
             using (var fs = new FileStream(opts.OutputFile, FileMode.Create, FileAccess.Write))
             using (var package = new ExcelPackage(fs))
             {
@@ -119,7 +123,7 @@ namespace Tadley
                     }
                 }
 
-                // process GSR/PPG data
+                // process Raw GSR/PPG data
                 foreach (var d in gsrPpgFragments)
                 {
                     var sheet = package.Workbook.Worksheets.Add(d.Key);
@@ -134,6 +138,29 @@ namespace Tadley
                     table.TableStyle = TableStyles.Medium14;
                     table.ShowFirstColumn = true;
                 }
+
+                // process post-processed GSR/PPG data
+                var processedGsrSheet = package.Workbook.Worksheets.Add("Processed GSR");
+                var processedGsrQuery = from p in processedGsr
+                                        select new { Timestamp = new TimeSpan(p.Timestamp).ToString("g"), p.Value };
+                processedGsrSheet.Cells[1, 1].LoadFromCollection(processedGsrQuery, PrintHeaders: true);
+                processedGsrSheet.Cells[processedGsrSheet.Dimension.Address].AutoFitColumns();
+                var processedGsrTable = processedGsrSheet.Tables.Add(processedGsrSheet.Dimension, "ProcessedGSR");
+                // Set table properties (order matters!)
+                processedGsrTable.ShowRowStripes = false;
+                processedGsrTable.TableStyle = TableStyles.Medium13;
+                processedGsrTable.ShowFirstColumn = true;
+
+                var bpmSheet = package.Workbook.Worksheets.Add("BPM");
+                var bpmQuery = from p in processedPpg
+                               select new { Timestamp = new TimeSpan(p.Timestamp).ToString("g"), p.Value };
+                bpmSheet.Cells[1, 1].LoadFromCollection(bpmQuery, PrintHeaders: true);
+                bpmSheet.Cells[bpmSheet.Dimension.Address].AutoFitColumns();
+                var bpmTable = bpmSheet.Tables.Add(bpmSheet.Dimension, "BPM");
+                // Set table properties (order matters!)
+                bpmTable.ShowRowStripes = false;
+                bpmTable.TableStyle = TableStyles.Medium13;
+                bpmTable.ShowFirstColumn = true;
 
                 package.Save();
             }

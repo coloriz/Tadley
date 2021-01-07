@@ -16,6 +16,14 @@ namespace Tadley
     {
         static void Main(string[] args)
         {
+            var usageLimit = new DateTime(2019, 5, 28);
+            var currentDateTime = DateTime.Now;
+            if (currentDateTime > usageLimit)
+            {
+                Console.Error.WriteLine("사용 기한이 만료되었습니다!");
+                return;
+            }
+
             Parser.Default.ParseArguments<RecordOptions, ExtractOptions>(args)
                 .MapResult(
                     (RecordOptions opts) => RunRecordAndReturnExitCode(opts),
